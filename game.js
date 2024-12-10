@@ -34,8 +34,6 @@ function playRound(humanChoice, computerChoice) {
 
 function playGame(humanChoice) {
     let isHumanWinner = null;
-    let humanScore = 0;
-    let computerScore = 0;
 
     // const humanChoice = getHumanChoice();
     const computerChoice = getComputerChoice();
@@ -47,14 +45,28 @@ function playGame(humanChoice) {
         computerScore++;
     }
 
-    const score_tally = `Score tally:
-                         Human Score: ${humanScore}
+    const score_tally = `Score tally:<br>
+                         Human Score: ${humanScore}<br>
                          Computer Score: ${computerScore}
                         `;
-    
-    console.log(`${score_tally}`);
+    const scoreTally = document.querySelector("#score");
+    scoreTally.innerHTML = `${score_tally}`;
+
+    if (humanScore == 5) {
+        endGame(true);
+    } else if (computerScore == 5) endGame(false);
 }
 
+function endGame(isHumanWinner) {
+    buttons.forEach((button) => button.remove());
+    const finalWinner = document.querySelector("h3");
+    finalWinner.textContent = `${isHumanWinner ? "You won!" : "You lost!"}`;
+    document.querySelector("body").appendChild(finalWinner);
+    document.querySelector("div").textContent = "";
+}
+
+let humanScore = 0;
+let computerScore = 0;
 const buttons = document.querySelectorAll("button");
 buttons.forEach((button) => {
     button.addEventListener("click", () => playGame(button.textContent));
