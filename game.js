@@ -15,18 +15,19 @@ function getComputerChoice() {
 // }
 
 function playRound(humanChoice, computerChoice) {
+    const div = document.querySelector("div");
     if (humanChoice == computerChoice) {
-        console.log(`You tied! You both chose ${humanChoice}`);
+        div.textContent = `You tied! You both chose ${humanChoice}`;
         return null;
     }
     else if ((humanChoice == "rock" && computerChoice == "scissors") || 
         (humanChoice == "paper" && computerChoice == "rock") || 
         (humanChoice == "scissors" && computerChoice == "paper")) {
-            console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+            div.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
             return true;
     }
     else {
-        console.log(`You lost! ${computerChoice} beats ${humanChoice}`);
+        div.textContent = `You lost! ${computerChoice} beats ${humanChoice}`;
         return false;
     }
 }
