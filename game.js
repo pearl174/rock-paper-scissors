@@ -9,10 +9,10 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice() {
-    const humanChoice = window.prompt("Enter your choice from rock, paper, scissors");
-    return humanChoice.toLowerCase();
-}
+// function getHumanChoice() {
+//     const humanChoice = window.prompt("Enter your choice from rock, paper, scissors");
+//     return humanChoice.toLowerCase();
+// }
 
 function playRound(humanChoice, computerChoice) {
     if (humanChoice == computerChoice) {
@@ -31,24 +31,30 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-function playGame() {
+function playGame(humanChoice) {
     let isHumanWinner = null;
     let humanScore = 0;
     let computerScore = 0;
-    for (let i = 0; i < 5; i++) {
-        isHumanWinner = playRound(getHumanChoice(), getComputerChoice());
-        if (isHumanWinner == true) {
-            humanScore++;
-        } else if (isHumanWinner == false) {
-            computerScore++;
-        }
+
+    // const humanChoice = getHumanChoice();
+    const computerChoice = getComputerChoice();
+
+    isHumanWinner = playRound(humanChoice, computerChoice);
+    if (isHumanWinner == true) {
+        humanScore++;
+    } else if (isHumanWinner == false) {
+        computerScore++;
     }
-    const score_tally = 
-    `Score tally:
-    Human Score: ${humanScore}
-    Computer Score: ${computerScore}
-    `;
+
+    const score_tally = `Score tally:
+                         Human Score: ${humanScore}
+                         Computer Score: ${computerScore}
+                        `;
+    
     console.log(`${score_tally}`);
 }
 
-playGame();
+const buttons = document.querySelectorAll("button");
+buttons.forEach((button) => {
+    button.addEventListener("click", () => playGame(button.textContent));
+});
